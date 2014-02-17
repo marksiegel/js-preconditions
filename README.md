@@ -7,11 +7,11 @@ This library explores the ability to easily annotate javascript methods for exec
 
 Example:
 
-var myFunc = $$().Argument('foo', 'string').Returns('boolean').$$(
-  function (foo) {
-    // method contents
-    return true;
-  });
+    var myFunc = $$().Argument('foo', 'string').Returns('boolean').$$(  
+      function (foo) {  
+        // method contents  
+        return true;  
+    });
 
 The above pattern notifies that this function should be called such that the 'foo' argument is a string and that it will return a boolean value.
 
@@ -35,19 +35,19 @@ This object also has the method: .$$(func) on it, which is used to terminate the
 
 Example: 
 
-var myFunc = $$() // Start declaring conditions
-              .Argument('foo', 'string')  // Condition 1
-              .Returns('boolean')         // Condition 2
-              .$$(function myFunc(foo) {  // Stop declaring conditions, wrap this function
-                // Method contents
-              });
+    var myFunc = $$() // Start declaring conditions
+                  .Argument('foo', 'string')  // Condition 1
+                  .Returns('boolean')         // Condition 2
+                  .$$(function myFunc(foo) {  // Stop declaring conditions, wrap this function
+                    // Method contents
+                  });
               
 It can also be used to describe methods on an object's prototype:
 
-MyObject.prototype.myFunc = $$().Argument('foo', 'string').Returns('boolean').$$(
-  function myFunc (foo) {
-    // Method contents
-  });
+    MyObject.prototype.myFunc = $$().Argument('foo', 'string').Returns('boolean').$$(
+      function myFunc (foo) {
+        // Method contents
+      });
 
 Built-in Conditions
 ===================
