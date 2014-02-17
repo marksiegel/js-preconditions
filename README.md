@@ -53,14 +53,21 @@ Built-in Conditions
 ===================
 
 CalledOnce()
+------------
+
 Ensures the method is only called once.  If the method is called on an object (with a this reference), it will make sure it only gets called once on that object, but the function itself may be called on multiple different objects a single time.
 
 e.g. $$().CalledOnce().$$(function init() {...})
 
 CalledBefore(function)
+----------------------
 CalledBefore(functionName)
+--------------------------
 CalledAfter(function)
+---------------------
 CalledAfter(functionName)
+-------------------------
+
 Ensures the method is called either before or after the given function has been called.  In the CalledBefore case, it will make sure the referenced function has never been called before, while in the CalledAfter case it will make sure that the referenced function has been called at some point before.  The method can either be given a direct reference to a function, or if the method will be called on an object the function name on the object can be given instead.  It is expected that the function being declared and the function referenced are either both object methods ore both not object methods.
 
 e.g. $$().CalledAfter('init').CalledBefore('destroy').$$(function render() {...})
