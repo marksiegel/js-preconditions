@@ -52,52 +52,64 @@ MyObject.prototype.myFunc = $$().Argument('foo', 'string').Returns('boolean').$$
 Built-in Conditions
 ===================
 
-CalledOnce()
-------------
+**CalledOnce()**
 
 Ensures the method is only called once.  If the method is called on an object (with a this reference), it will make sure it only gets called once on that object, but the function itself may be called on multiple different objects a single time.
 
-e.g. $$().CalledOnce().$$(function init() {...})
+'$$().CalledOnce().$$(function init() {...})'
 
-CalledBefore(function)
-----------------------
-CalledBefore(functionName)
---------------------------
-CalledAfter(function)
----------------------
-CalledAfter(functionName)
--------------------------
+
+**CalledBefore(function)**
+
+**CalledBefore(functionName)**
+
+**CalledAfter(function)**
+
+**CalledAfter(functionName)**
 
 Ensures the method is called either before or after the given function has been called.  In the CalledBefore case, it will make sure the referenced function has never been called before, while in the CalledAfter case it will make sure that the referenced function has been called at some point before.  The method can either be given a direct reference to a function, or if the method will be called on an object the function name on the object can be given instead.  It is expected that the function being declared and the function referenced are either both object methods ore both not object methods.
 
-e.g. $$().CalledAfter('init').CalledBefore('destroy').$$(function render() {...})
+'$$().CalledAfter('init').CalledBefore('destroy').$$(function render() {...})'
 
-Argument(index, type1 [, type2, type3])
-Argument(name, type1 [, type2, type3])
+
+**Argument(index, type1 [, type2, type3])**
+
+**Argument(name, type1 [, type2, type3])**
+
 Ensures that the method argument either at the given index or with the given name matches at least one of the types provided.  See Built-in Types below for a list of types.  If using a name, dot notation can be used to validate an object-typed argument's subproperties.
 
-e.g. $$().Argument('text', 'string', 'unset').$$(function setText (text) {...})
-e.g. $$().Argument('options.showLabel', 'boolean').$$(function setOptions(options) {...})
+`$$().Argument('text', 'string', 'unset').$$(function setText (text) {...})`
+`$$().Argument('options.showLabel', 'boolean').$$(function setOptions(options) {...})`
 
-Returns(type1 [, type2, type3])
+
+**Returns(type1 [, type2, type3])**
+
 Ensures that the method's returns value matches at least one of the types provided.  See Built-in Types for a list of types.
 
-e.g. $$().Returns('number').$$(function getCount() {...})
+`$$().Returns('number').$$(function getCount() {...})`
 
-Property(name, type1 [, type2, type3])
-PropertyAfter(name, type1 [, type2, type3])
+
+**Property(name, type1 [, type2, type3])**
+
+**PropertyAfter(name, type1 [, type2, type3])**
+
 Can only be used on a method called on an object (with a this reference).  Ensures that the object's property with the given name matches at least one of the types provided.  See Built-in Types below for a list of types.  If using a name, dot notation can be used to validate an object-typed property's subproperties.  Property will check the state before the method executes, while PropertyAfter checks after the method is finished executing.
 
-e.g. $$().Property('_div', 'jquery').$$(function setLabel(text) {...})
-e.g. $$().Property('_listeners.length', 'greaterThanZero').$$(function removeListener(l) {...})
+`$$().Property('_div', 'jquery').$$(function setLabel(text) {...})`
+`$$().Property('_listeners.length', 'greaterThanZero').$$(function removeListener(l) {...})`
 
-Custom(function)
-Custom(functionName)
-CustomAfter(function)
-CustomAfter(functionName)
+
+**Custom(function)**
+
+**Custom(functionName)**
+
+**CustomAfter(function)**
+
+**CustomAfter(functionName)**
+
 Call a custom function to perform validation.  If this function returns a falsy object then validation fails, otherwise validation passes.  The function can either be a direct function reference or if the method is called on an object it can be the name of another function on the object.
 
-e.g. $$().Custom('isInDom').$$(function destroy() {...})
+`$$().Custom('isInDom').$$(function destroy() {...})`
 
 Built-in Types
 ==============
@@ -105,15 +117,21 @@ Built-in Types
 The js-preconditions module has a few built in type identifiers to help with the variety of conditions that deal with type matching:
 
 'number' - the value is a number
+
 'string' - the value is a string
+
 'boolean' - the value is a boolean
+
 'truthy' - the value evaluates to true in a boolean expression
+
 'falsy' - the value evaluates to false in a boolean expresssion
+
 'unset' - the value is undefined
+
 'nothing' - the value is undefined
 
-Additional types can be added by calling:
-$$.addType(typeName, evaluatorFunction(value))
+Additional types can be added by calling: $$.addType(typeName, evaluatorFunction(value))
+
 typeName is the name of the new type and evaluatorFunction is a function that when given a value returns true or false based on whether the value matches the type.
 
-e.g. $$.addType('greaterThanZero', function (value) { return value > 0; })
+`$$.addType('greaterThanZero', function (value) { return value > 0; })`
